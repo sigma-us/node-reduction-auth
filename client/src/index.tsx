@@ -1,14 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import Register from './register/register';
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
   <Router>
     <div>
-      <Route path="/" component={App} />
+      <nav>
+        <ul>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        </ul>
+      </nav>
+      <Switch>
+        <Route path="/" exact component={App} />
+        <Route path="/register" exact component={Register} />
+      </Switch>
     </div>
   </Router>
 )
