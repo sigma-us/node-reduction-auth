@@ -148,4 +148,5 @@ class Register extends Component<any, myState> {
 export default reduxForm<any, myState>({
   form: 'user',
   destroyOnUnmount: false
+  // validator goes here
 })(Register);
