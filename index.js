@@ -13,7 +13,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get('/api/register', (req, res) => {
+app.post('/api/register', (req, res) => {
   const db = app.get('db');
   const user = {
     firstname: 'first',
@@ -22,12 +22,15 @@ app.get('/api/register', (req, res) => {
     email: 'test@gmail.com',
     password: 'okokokokokokok'
   }
-  // db.users.insert(user, (err, res) => {
-  //   console.log(err, res);
-  // })
-  db.users.findOne({id: 2}, function(err, dbres) {
-    console.log(err, dbres);
+  console.log(req.body.user);
+  db.users.insert(req.body.user, function(err, res) {
+    console.log(err, res);
+    if (!err) res.status(200).json(res);
+    else res.status(400).json(err);
   })
+  // db.users.findOne({id: 2}, function(err, dbres) {
+  //   console.log(err, dbres);
+  // })
 });
 
 // postgresql connection register with massive js
