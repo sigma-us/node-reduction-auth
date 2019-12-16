@@ -1,7 +1,7 @@
 # node-reduction-auth
 Auth flow using node.js react redux
 
-## to run locally
+## Clone and Run Locally
 - clone repo
 - `cd node-reduction-auth`
 - `npm i`
