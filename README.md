@@ -9,7 +9,7 @@ Auth flow using node.js react redux
 - `cd client`
 - `npm i`
 - `yarn start`
-- please not this project also requires postgresql DB to be running locally
+- please note this project also requires postgresql DB to be running locally
 - you will also need a `.env` file for the `DB_URL`
 
 ## Work in Progress:
