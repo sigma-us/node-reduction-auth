@@ -1,9 +1,20 @@
 # node-reduction-auth
 Auth flow using node.js react redux
 
+## to run locally
+- clone repo
+- `cd node-reduction-auth`
+- `npm i`
+- `node index.js` or `nodemon index.js` 
+- `cd client`
+- `npm i`
+- `yarn start`
+- please not this project also requires postgresql DB to be running locally
+- you will also need a `.env` file for the `DB_URL`
+
 ## Work in Progress:
 ### To-do:
-- add bcrypt to encrypt passwords
+- bcrypt error handling
 - registration form input validators
 - route guards for register/confirm pages
 
