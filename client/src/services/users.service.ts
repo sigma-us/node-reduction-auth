@@ -6,7 +6,7 @@ interface myState {
 }
 
 export default class UserService extends Component<any, myState> {
-  constructor(props: any) {
+  constructor(props: any | null) {
     super(props);
     this.state = {
       baseUri: '/api'
@@ -15,6 +15,10 @@ export default class UserService extends Component<any, myState> {
 
   registerUser = async (userInfo: any) => {
     return await axios.post(`${this.state.baseUri}/register`, {user: userInfo});
+  }
+
+  check = async (type: string, value: string) => {
+    return await axios.get(`${this.state.baseUri}/check/${type}?${type}=${value}`);
   }
 
 }
