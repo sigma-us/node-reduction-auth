@@ -50,8 +50,6 @@ class Register extends Component<any, myState> {
       if (!checkRes.data.length && !checkUs.data.length) {
         this.props.history.push('/register/confirm');
       }
-      // const registerRes = await service.registerUser(this.state);
-      // console.log(registerRes);
     } catch (e) {
       console.log('Error: ', e);
     }

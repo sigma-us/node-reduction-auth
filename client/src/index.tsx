@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import Register from './register/register';
 import Confirm from './register/confirm';
+import Welcome from './register/welcome';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
 import store from "./redux/reducers/reducers";
@@ -25,6 +26,7 @@ const routing = (
           <Route path="/" exact component={App} />
           <Route path="/register" exact component={Register} />
           <Route path="/register/confirm" exact component={Confirm} />
+          <Route path="/welcome" exact component={Welcome} />
         </Switch>
       </Provider>
     </div>
