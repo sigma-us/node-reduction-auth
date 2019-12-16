@@ -4,7 +4,11 @@ import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Register from './register/register';
+import Confirm from './register/confirm';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from "react-redux";
+import store from "./redux/reducers/reducers";
+
 
 const routing = (
   <Router>
@@ -16,10 +20,13 @@ const routing = (
           </li>
         </ul>
       </nav>
-      <Switch>
-        <Route path="/" exact component={App} />
-        <Route path="/register" exact component={Register} />
-      </Switch>
+      <Provider store={store}>
+        <Switch>
+          <Route path="/" exact component={App} />
+          <Route path="/register" exact component={Register} />
+          <Route path="/register/confirm" exact component={Confirm} />
+        </Switch>
+      </Provider>
     </div>
   </Router>
 )

@@ -13,6 +13,9 @@ const app = express();
 
 app.use(bodyParser.json());
 
+
+// routes to be separated out
+
 app.post('/api/register', async (req, res) => {
   try {
     const db = app.get('db');
@@ -23,10 +26,31 @@ app.post('/api/register', async (req, res) => {
   } catch (e) {
     res.status(400).json(e)
   }
-  // db.users.findOne({id: 2}, function(err, dbres) {
-  //   console.log(err, dbres);
-  // })
 });
+
+app.get('/api/check/username', async (req, res) => {
+  try {
+    const db = app.get('db');
+    const response = await db.users.find({username: req.query.username});
+    console.log(response);
+    res.status(200).json(response);
+  } catch (e) {
+    res.status(500).error(e);
+  }
+});
+
+app.get('/api/check/email', async (req, res) => {
+  try {
+    const db = app.get('db');
+    const response = await db.users.find({email: req.query.email});
+    console.log(response);
+    res.status(200).json(response);
+  } catch (e) {
+    res.status(500).error(e);
+  }
+})
+
+// end routes 
 
 // postgresql connection register with massive js
 massive(DB_URL).then(massiveInstance => {

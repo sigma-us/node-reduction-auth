@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import UserService from "../services/users.service";
+import { Field, reduxForm } from 'redux-form';
+import store from '../redux/reducers/reducers';
+
 
 interface myState {
+  props: any,
   firstname: string,
   lastname: string,
   username: string,
@@ -13,17 +17,11 @@ interface myState {
 class Register extends Component<any, myState> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      firstname: '',
-      lastname: '',
-      username: '',
-      email: '',
-      password: '',
-      confirmpassword: ''
-    };
     this.changeHandler = this.changeHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+
 
   changeHandler = (event: any) => {
     const name = event.target.name;
@@ -36,80 +34,109 @@ class Register extends Component<any, myState> {
   }
 
   handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const service = new UserService(true);
+    try {
+      e.preventDefault();
+      const state = store.getState();
+      const user = state.form.user.values as myState;
+      const service = new UserService(null);
+      const checkRes = await service.check('email', user.email);
+      if (checkRes.data.length) alert('Email in use');
+      const checkUs = await service.check('username', user.username);
+      if (checkUs.data.length) alert('Username in use');
+      
 
-    const registerRes = await service.registerUser(this.state);
-    console.log(registerRes);
+      console.log(checkRes, checkUs);
 
+      if (!checkRes.data.length && !checkUs.data.length) {
+        this.props.history.push('/register/confirm');
+      }
+      // const registerRes = await service.registerUser(this.state);
+      // console.log(registerRes);
+    } catch (e) {
+      console.log('Error: ', e);
+    }
   }
 
+
   render() {
+    const { pristine, submitting, reset } = this.props;
+
     return (
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>
               First Name:
-              <input type="text"
+              <Field
+                type="text"
+                component="input"
                 name="firstname"
-                value={this.state.firstname}
-                onChange={this.changeHandler}
+                placeholder="First Name"
               />
             </label>
           </div>
           <div>
             <label>
               Last Name:
-              <input type="text"
+              <Field
+                type="text"
+                component="input"
                 name="lastname"
-                value={this.state.lastname}
-                onChange={this.changeHandler}
+                placeholder="Last Name"
               />
             </label>
           </div>
           <div>
             <label>
               Username:
-              <input type="text"
+              <Field
+                type="text"
+                component="input"
                 name="username"
-                value={this.state.username}
-                onChange={this.changeHandler}
+                placeholder="Username"
               />
             </label>
           </div>
           <div>
             <label>
               Email:
-              <input type="email"
+              <Field
+                type="email"
+                component="input"
                 name="email"
-                value={this.state.email}
-                onChange={this.changeHandler}
+                placeholder="Email"
               />
             </label>
           </div>
           <div>
             <label>
               Password:
-              <input type="password"
+              <Field
+                type="password"
+                component="input"
                 name="password"
-                value={this.state.password}
-                onChange={this.changeHandler}
+                placeholder="Password"
               />
             </label>
           </div>
           <div>
             <label>
               Confirm Password:
-              <input type="password"
+              <Field
+                type="password"
+                component="input"
                 name="confirmpassword"
-                value={this.state.confirmpassword}
-                onChange={this.changeHandler}
+                placeholder="Confirm Password"
               />
             </label>
           </div>
           <div>
-            <input type="submit" value="Submit" />
+            <button type="submit" disabled={pristine || submitting}>
+              Submit
+            </button>
+            <button type="button" disabled={pristine || submitting} onClick={reset}>
+              Clear Values
+            </button>
           </div>
         </form>
       </div>
@@ -117,4 +144,7 @@ class Register extends Component<any, myState> {
   }
 }
 
-export default Register;
+
+export default reduxForm<any, myState>({
+  form: 'user'
+})(Register);
