@@ -146,5 +146,6 @@ class Register extends Component<any, myState> {
 
 
 export default reduxForm<any, myState>({
-  form: 'user'
+  form: 'user',
+  destroyOnUnmount: false
 })(Register);
