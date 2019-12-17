@@ -57,6 +57,24 @@ class Register extends Component<any, myState> {
   }
 
 
+  renderField = ({
+    input,
+    label,
+    type,
+    meta: { touched, error, warning }
+  }: any) => (
+    <div>
+      <label>{label}</label>
+      <div>
+        <input {...input} placeholder={label} type={type} />
+        {touched &&
+          ((error && <span>{error}</span>) ||
+            (warning && <span>{warning}</span>))}
+      </div>
+    </div>
+  )
+
+
   render() {
     const { pristine, submitting, reset } = this.props;
 
@@ -68,7 +86,7 @@ class Register extends Component<any, myState> {
               First Name:
               <Field
                 type="text"
-                component="input"
+                component={this.renderField}
                 name="firstname"
                 placeholder="First Name"
               />
@@ -79,7 +97,7 @@ class Register extends Component<any, myState> {
               Last Name:
               <Field
                 type="text"
-                component="input"
+                component={this.renderField}
                 name="lastname"
                 placeholder="Last Name"
               />
@@ -90,7 +108,7 @@ class Register extends Component<any, myState> {
               Username:
               <Field
                 type="text"
-                component="input"
+                component={this.renderField}
                 name="username"
                 placeholder="Username"
               />
@@ -101,7 +119,7 @@ class Register extends Component<any, myState> {
               Email:
               <Field
                 type="email"
-                component="input"
+                component={this.renderField}
                 name="email"
                 placeholder="Email"
               />
@@ -112,7 +130,7 @@ class Register extends Component<any, myState> {
               Password:
               <Field
                 type="password"
-                component="input"
+                component={this.renderField}
                 name="password"
                 placeholder="Password"
               />
@@ -123,7 +141,7 @@ class Register extends Component<any, myState> {
               Confirm Password:
               <Field
                 type="password"
-                component="input"
+                component={this.renderField}
                 name="confirmpassword"
                 placeholder="Confirm Password"
               />
