@@ -84,7 +84,7 @@ class Register extends Component<any, myState> {
           <div>
             <Field
               type="text"
-              label="First Name:"
+              label="First Name"
               component={this.renderField}
               name="firstname"
               placeholder="First Name"
@@ -93,7 +93,7 @@ class Register extends Component<any, myState> {
           <div>
             <Field
               type="text"
-              label="Last Name:"
+              label="Last Name"
               component={this.renderField}
               name="lastname"
               placeholder="Last Name"
