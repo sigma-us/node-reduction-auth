@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import UserService from "../services/users.service";
 import { Field, reduxForm } from 'redux-form';
 import store from '../redux/reducers/reducers';
+import validate from './validate';
 
 
-interface myState {
+export interface myState {
   props: any,
   firstname: string,
   lastname: string,
@@ -145,6 +146,7 @@ class Register extends Component<any, myState> {
 
 export default reduxForm<any, myState>({
   form: 'user',
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
+  validate
   // validator goes here
 })(Register);
