@@ -44,7 +44,7 @@ class Register extends Component<any, myState> {
       if (checkRes.data.length) alert('Email in use');
       const checkUs = await service.check('username', user.username);
       if (checkUs.data.length) alert('Username in use');
-      
+
 
       console.log(checkRes, checkUs);
 
@@ -63,16 +63,16 @@ class Register extends Component<any, myState> {
     type,
     meta: { touched, error, warning }
   }: any) => (
-    <div>
-      <label>{label}</label>
       <div>
-        <input {...input} placeholder={label} type={type} />
-        {touched &&
-          ((error && <span>{error}</span>) ||
-            (warning && <span>{warning}</span>))}
+        <label>{label}</label>
+        <div>
+          <input {...input} placeholder={label} type={type} />
+          {touched &&
+            ((error && <span>{error}</span>) ||
+              (warning && <span>{warning}</span>))}
+        </div>
       </div>
-    </div>
-  )
+    )
 
 
   render() {
@@ -82,70 +82,58 @@ class Register extends Component<any, myState> {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <label>
-              First Name:
-              <Field
-                type="text"
-                component={this.renderField}
-                name="firstname"
-                placeholder="First Name"
-              />
-            </label>
+            <Field
+              type="text"
+              label="First Name:"
+              component={this.renderField}
+              name="firstname"
+              placeholder="First Name"
+            />
           </div>
           <div>
-            <label>
-              Last Name:
-              <Field
-                type="text"
-                component={this.renderField}
-                name="lastname"
-                placeholder="Last Name"
-              />
-            </label>
+            <Field
+              type="text"
+              label="Last Name:"
+              component={this.renderField}
+              name="lastname"
+              placeholder="Last Name"
+            />
           </div>
           <div>
-            <label>
-              Username:
-              <Field
-                type="text"
-                component={this.renderField}
-                name="username"
-                placeholder="Username"
-              />
-            </label>
+            <Field
+              type="text"
+              label="Username"
+              component={this.renderField}
+              name="username"
+              placeholder="Username"
+            />
           </div>
           <div>
-            <label>
-              Email:
-              <Field
-                type="email"
-                component={this.renderField}
-                name="email"
-                placeholder="Email"
-              />
-            </label>
+            <Field
+              type="email"
+              label="Email"
+              component={this.renderField}
+              name="email"
+              placeholder="Email"
+            />
           </div>
           <div>
-            <label>
-              Password:
-              <Field
-                type="password"
-                component={this.renderField}
-                name="password"
-                placeholder="Password"
-              />
-            </label>
+            <Field
+              type="password"
+              label="Password"
+              component={this.renderField}
+              name="password"
+              placeholder="Password"
+            />
           </div>
           <div>
-            <label>
-              Confirm Password:
-              <Field
-                type="password"
-                component={this.renderField}
-                name="confirmpassword"
-                placeholder="Confirm Password"
-              />
-            </label>
+            <Field
+              type="password"
+              label="Confirm Password"
+              component={this.renderField}
+              name="confirmpassword"
+              placeholder="Confirm Password"
+            />
           </div>
           <div>
             <button type="submit" disabled={pristine || submitting}>
